@@ -1,2 +1,2 @@
 # watchy_moto
-Yet another Watchy watchface: motorcyle themed watchfaces
+Yet another Watchy watchface: motorcyle themed multi-watchfaces
