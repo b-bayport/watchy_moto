@@ -41,16 +41,15 @@ void WatchyMoto::drawGhostRider(bool light, float batt) {
     display.setFont(&Ghost_Factory26pt7b);
     display.setCursor(32, 36);
     int displayHour;
-    if(HOUR_12_24==12){
-      displayHour = ((currentTime.Hour+11)%12)+1;
+    if(currentTime.Hour == 0){
+      displayHour = 12;
     } else {
-      displayHour = currentTime.Hour;
-    }
-    if(displayHour < 10){
-        display.print("0");
+      displayHour = currentTime.Hour <=12 ? currentTime.Hour : currentTime.Hour - 12;
     }
     display.print(displayHour);
+   
     display.print(":");
+    
     if(currentTime.Minute < 10){
         display.print("0");
     }
