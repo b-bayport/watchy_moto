@@ -1,14 +1,15 @@
 void WatchyMoto::drawZ900RSCafe(bool light, float batt) {
     // draw background
-    display.fillScreen(light ? GxEPD_BLACK : GxEPD_WHITE);
-    display.drawBitmap(0, 0, z900rscafe_img, 200, 200, light ? GxEPD_WHITE : GxEPD_BLACK);
+    display.fillScreen(GxEPD_BLACK);
+    display.drawBitmap(0, 0, z900rscafe_img, 200, 200, GxEPD_WHITE);
 
-    display.setTextColor(light ? GxEPD_BLACK : GxEPD_WHITE);
+    display.setTextColor(GxEPD_BLACK);
     display.setTextWrap(false);
+
 
     // Draw Time /////////////////////////////////////////////////////////////////////////////// Draw Time //
     display.setFont(&CFWilliamWallace_Regular26pt7b);
-    display.setCursor(25, 199);    
+    display.setCursor(70, 199);    
     
     int displayHour;
     if(currentTime.Hour == 0){

@@ -1,6 +1,5 @@
 void WatchyMoto::drawTintin(bool light, float batt) {
 
-
     // ** SETUP **
 
     int16_t x1, y1;
@@ -8,10 +7,10 @@ void WatchyMoto::drawTintin(bool light, float batt) {
     String textstring, textstringday, textstringsteps;
 
     // draw background
-    display.fillScreen(light ? GxEPD_BLACK : GxEPD_WHITE);
-    display.drawBitmap(0, 0, tintin_img, 200, 200, light ? GxEPD_WHITE : GxEPD_BLACK);
+    display.fillScreen(GxEPD_BLACK);
+    display.drawBitmap(0, 0, tintin_img, 200, 200, GxEPD_WHITE);
 
-    display.setTextColor(light ? GxEPD_BLACK : GxEPD_WHITE);
+    display.setTextColor(GxEPD_BLACK);
     display.setTextWrap(false);
 
     // draw date  //////////////////////////////////////////////////////////////// draw date //
@@ -38,7 +37,7 @@ void WatchyMoto::drawTintin(bool light, float batt) {
     // draw time /////////////////////////////////////////////////////////////////////////////////////////////// TIME 
     
     display.setFont(&CFWilliamWallace_Regular26pt7b);
-    display.setCursor(105, 45);
+    display.setCursor(118, 45);
     int displayHour;
     if(currentTime.Hour == 0){
       displayHour = 12;
@@ -59,8 +58,8 @@ void WatchyMoto::drawTintin(bool light, float batt) {
     // draw battery  ///////////////////////////////////////////////////////////////// draw battery //
     //////////////////////////////////////////////////////////////////////////////////////////////////
     //  Draw Battery from 7_SEG
-    display.drawBitmap(05, 05, battery, 37, 21, light ? GxEPD_BLACK : GxEPD_WHITE);
-    display.fillRect(10, 10, 27, BATTERY_SEGMENT_HEIGHT, light ? GxEPD_WHITE : GxEPD_BLACK);//clear battery segments
+    display.drawBitmap(05, 05, battery, 37, 21, GxEPD_BLACK);
+    display.fillRect(10, 10, 27, BATTERY_SEGMENT_HEIGHT, GxEPD_WHITE);//clear battery segments
     int8_t batteryLevel = 0;
     float VBAT = getBatteryVoltage();
     if(VBAT > 4.1){
@@ -77,9 +76,7 @@ void WatchyMoto::drawTintin(bool light, float batt) {
     }
 
     for(int8_t batterySegments = 0; batterySegments < batteryLevel; batterySegments++){
-        display.fillRect(10 + (batterySegments * BATTERY_SEGMENT_SPACING), 10, BATTERY_SEGMENT_WIDTH, BATTERY_SEGMENT_HEIGHT, light ? GxEPD_BLACK : GxEPD_WHITE);
+        display.fillRect(10 + (batterySegments * BATTERY_SEGMENT_SPACING), 10, BATTERY_SEGMENT_WIDTH, BATTERY_SEGMENT_HEIGHT, GxEPD_BLACK);
     } //  END OF Draw Battery from 7_SEG
 
 }
-   
-

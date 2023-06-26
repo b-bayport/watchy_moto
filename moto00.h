@@ -10,10 +10,10 @@ void WatchyMoto::drawMoto00(bool light, float batt) {
     
 
     // draw background
-    display.fillScreen(light ? GxEPD_BLACK : GxEPD_WHITE);
-    display.drawBitmap(0,0, moto00_img, 200, 200, light ? GxEPD_WHITE : GxEPD_BLACK);
+    display.fillScreen(GxEPD_BLACK);
+    display.drawBitmap(0,0, moto00_img, 200, 200, GxEPD_WHITE);
 
-    display.setTextColor(light ? GxEPD_BLACK : GxEPD_WHITE);
+    display.setTextColor(GxEPD_BLACK);
     display.setTextWrap(false);
 
     // draw date  //////////////////////////////////////////////////////////////// draw date //
@@ -42,16 +42,15 @@ void WatchyMoto::drawMoto00(bool light, float batt) {
     display.setFont(&CFWilliamWallace_Regular30pt7b);
     display.setCursor(6, 197);
     int displayHour;
-    if(HOUR_12_24==12){
-      displayHour = ((currentTime.Hour+11)%12)+1;
+    if(currentTime.Hour == 0){
+      displayHour = 12;
     } else {
-      displayHour = currentTime.Hour;
-    }
-    if(displayHour < 10){
-        display.print("0");
+      displayHour = currentTime.Hour <=12 ? currentTime.Hour : currentTime.Hour - 12;
     }
     display.print(displayHour);
+   
     display.print(":");
+    
     if(currentTime.Minute < 10){
         display.print("0");
     }
@@ -59,8 +58,8 @@ void WatchyMoto::drawMoto00(bool light, float batt) {
     
 
     // draw battery  ///////////////////////////////////////////////////////////////// draw battery //
-    display.drawBitmap(5, 5, battery, 37, 21, light ? GxEPD_BLACK : GxEPD_WHITE);
-    display.fillRect(10, 10, 27, BATTERY_SEGMENT_HEIGHT, light ? GxEPD_WHITE : GxEPD_BLACK);//clear battery segments
+    display.drawBitmap(5, 5, battery, 37, 21, GxEPD_BLACK);
+    display.fillRect(10, 10, 27, BATTERY_SEGMENT_HEIGHT, GxEPD_WHITE);//clear battery segments
     int8_t batteryLevel = 0;
     float VBAT = getBatteryVoltage();
     if(VBAT > 4.1){
@@ -77,7 +76,7 @@ void WatchyMoto::drawMoto00(bool light, float batt) {
     }
 
     for(int8_t batterySegments = 0; batterySegments < batteryLevel; batterySegments++){
-        display.fillRect(10 + (batterySegments * BATTERY_SEGMENT_SPACING), 10,BATTERY_SEGMENT_WIDTH, BATTERY_SEGMENT_HEIGHT, light ? GxEPD_BLACK : GxEPD_WHITE);
+        display.fillRect(10 + (batterySegments * BATTERY_SEGMENT_SPACING), 10,BATTERY_SEGMENT_WIDTH, BATTERY_SEGMENT_HEIGHT, GxEPD_BLACK);
     } 
 
 }
